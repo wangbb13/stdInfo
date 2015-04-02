@@ -53,7 +53,7 @@ class Scholarship(models.Model):
 class  Grant(models.Model):
     student = models.ForeignKey(Postgraduate)
     code = models.CharField(u"助项代码", max_length=30, null=True)
-    year = models.CharField(u"奖学金学年度", max_length=50, null=True)
+    year = models.CharField(u"助学金学年度", max_length=50, null=True)
     name = models.CharField(u"助项简称", null=True, max_length=50)
     amount = models.IntegerField(u"获助金额", null=True)
 
