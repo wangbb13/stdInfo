@@ -1,5 +1,5 @@
 #coding: utf-8
-__author__ = 'Qingfu Wen'
+__author__ = 'Zichen Zhu'
 __email__ = 'thssvince@163.com'
 from django.http import HttpResponse
 from django.template import RequestContext
@@ -64,7 +64,7 @@ def index(request):
 
 def search(request):
     if request.method == 'GET':
-        return render_to_response("manage/search.html", context_instance=RequestContext(request))
+        return render_to_response("postmanage/search.html", context_instance=RequestContext(request))
     else:
         students = Postgraduate.objects.all()
         if request.POST.get('number', ''):
@@ -100,7 +100,7 @@ def search(request):
         if request.POST.get('graduation_info', ''):
             graduation_info = True
 
-        return render_to_response("manage/search.html", {
+        return render_to_response("postmanage/search.html", {
             'students': students,
             'basic_info': basic_info,
             'degree_info': degree_info,
@@ -111,7 +111,7 @@ def search(request):
 
 def get_basic_info(request):
         students = Postgraduate.objects.all()
-        return render_to_response("manage/manage.html", locals(), context_instance=RequestContext(request))
+        return render_to_response("postmanage/manage.html", locals(), context_instance=RequestContext(request))
 
 @csrf_exempt
 def update_basic_info(request):
@@ -127,7 +127,7 @@ def update_basic_info(request):
     student = Postgraduate.objects.get(id=id)
     student.number = int(number)
     student.name = name
-    student.gender = True if gender == u'男' else False
+    student.gender = gender
     student.nation = nation
     student.politics = politics
     student.tutor = tutor
@@ -138,7 +138,7 @@ def update_basic_info(request):
 
 def get_degree_info(request):
     students = Postgraduate.objects.all()
-    return render_to_response("manage/degree.html", locals(), context_instance=RequestContext(request))
+    return render_to_response("postmanage/degree.html", locals(), context_instance=RequestContext(request))
 
 @csrf_exempt
 def update_degree_info(request):
@@ -199,7 +199,7 @@ def get_award_info(request):
             'grant': award_grant,
             'loan': award_loan
         })
-    return render_to_response("manage/award.html", {
+    return render_to_response("postmanage/award.html", {
         'awards' : awards
     }, context_instance=RequestContext(request))
 
@@ -259,7 +259,7 @@ def get_work_info(request):
             'competition': work_competition,
             'social_work': work_social_work
         })
-    return render_to_response("manage/work.html", {
+    return render_to_response("postmanage/work.html", {
         'works' : works
     }, context_instance=RequestContext(request))
 
@@ -286,7 +286,7 @@ def update_work_info(request):
 
 def get_graduation_info(request):
     students = Postgraduate.objects.all()
-    return render_to_response("manage/graduation.html", locals(), context_instance=RequestContext(request))
+    return render_to_response("postmanage/graduation.html", locals(), context_instance=RequestContext(request))
 
 @csrf_exempt
 def update_graduation_info(request):
@@ -315,7 +315,7 @@ def update_graduation_info(request):
     return HttpResponse('OK')
 
 def get_detail(request):
-    return render_to_response("manage/detail.html", {}, context_instance=RequestContext(request))
+    return render_to_response("postmanage/detail.html", {}, context_instance=RequestContext(request))
 
 def export_excel(request):
     if request.method == 'POST':
@@ -478,7 +478,7 @@ def export_excel(request):
         book.save(response)
         return response
     else :
-        return render_to_response("manage/export_excel.html", {}, context_instance=RequestContext(request))
+        return render_to_response("postmanage/export_excel.html", {}, context_instance=RequestContext(request))
 
 def import_excel(request):
     if request.method == 'POST':
@@ -598,7 +598,7 @@ def import_excel(request):
                                 social_work.save()
                     except Exception as e:
                         error_msg = u'导入文件错误，错误位置(%d, %d)' %(i, j)
-                        return render_to_response("manage/error.html", {
+                        return render_to_response("postmanage/error.html", {
                             "error_msg": error_msg
                         }, context_instance=RequestContext(request))
 
@@ -611,13 +611,13 @@ def import_excel(request):
                 student.graduation = graduation
                 student.degree = degree
                 student.save()
-            return render_to_response("manage/import_excel.html", {}, context_instance=RequestContext(request))
+            return render_to_response("postmanage/import_excel.html", {}, context_instance=RequestContext(request))
         except Exception as e:
             error_msg = u'导入文件错误！%s' % e
-            return render_to_response("manage/error.html", {
+            return render_to_response("postmanage/error.html", {
                 "error_msg": error_msg
             }, context_instance=RequestContext(request))
     else:
-        return render_to_response("manage/import_excel.html", {}, context_instance=RequestContext(request))
+        return render_to_response("postmanage/import_excel.html", {}, context_instance=RequestContext(request))
 
 

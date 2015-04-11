@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+{% block title %}学生信息管理系统{% endblock %}
+
+{% block css_js %}
+    <link href="../static/css/manage.css" rel="stylesheet">
+{% endblock %}
+
+
+{% block header %}
+<!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav navbar-right">
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+              <span class="glyphicon glyphicon-user"></span> admin<span class="caret"></span>
+          </a>
+          <ul class="dropdown-menu" role="menu">
+            <li><a href="#">个人信息</a></li>
+            <li class="divider"></li>
+            <li><a href="#">设置</a></li>
+            <li class="divider"></li>
+            <li><a href="#">退出</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+{% endblock %}
+
+
+{% block content %}
+<div class="container-fluid" id="main">
+    <div class="row">
+        <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2" id="sidebar">
+            <ul id="sidebar-tab" class="nav nav-list collapse navbar-collapse nav-pills nav-stacked" role="tablist">
+                <li role="presentation" >
+                    <a href="/postmanage/basic_info">基本信息<i class="glyphicon glyphicon-chevron-right"></i></a>
+                </li>
+                <li role="presentation">
+                    <a href="/postmanage/degree_info" >学籍信息<i class="glyphicon glyphicon-chevron-right"></i></a>
+                </li>
+                <li role="presentation">
+                    <a href="/postmanage/award_info">奖助贷<i class="glyphicon glyphicon-chevron-right"></i></a>
+                </li>
+                <li role="presentation">
+                    <a href="/postmanage/work_info">科创社工<i class="glyphicon glyphicon-chevron-right"></i></a>
+                </li>
+                <li role="presentation">
+                    <a href="/postmanage/graduation_info">毕业信息<i class="glyphicon glyphicon-chevron-right"></i></a>
+                </li>
+                <li role="presentation" class="active">
+                    <a href="/postmanage/import_excel">导入<i class="glyphicon glyphicon-chevron-right"></i></a>
+                </li>
+                <li role="presentation">
+                    <a href="/postmanage/export_excel">导出<i class="glyphicon glyphicon-chevron-right"></i></a>
+                </li>
+            </ul>
+        </div>
+
+        <!--/span-->
+        <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10" id="content">
+            <div class="row">
+                {{ error_msg }}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -7,15 +7,15 @@ from django.contrib.auth.models import User
 
 class PostgraduateDegree(models.Model):
     degree = models.CharField(u"学位", max_length=30, null=True)
-    admissions_way = models.CharField(u"招生途径", max_length=20, default=u"统考")
-    rank_before_graduation = models.CharField(u"毕业前或推免前综合排名", max_length=30, null=True)
-    admissions_rank = models.CharField(u"入学成绩/排名", max_length=50, null=True)
+    class_name = models.CharField(u"班号", max_length=30, null=True)
     first_test = models.CharField(u"初试成绩", max_length=30, null=True)
     opening_time = models.DateField(u"开题时间", null=True)
     exchange_info = models.CharField(u"交流学校/时间", null=True)
+    admissions_way = models.CharField(u"招生途径", max_length=20, default=u"统考")
+    rank_before_graduation = models.CharField(u"毕业前或推免前综合排名", max_length=30, null=True)
+    admissions_rank = models.CharField(u"入学成绩/排名", max_length=50, null=True)
     regular_school = models.CharField(u"本科毕业学校", max_length=50, null=True)
     regular_major = models.CharField(u"本科专业", max_length=50, null=True)
-    class_name = models.CharField(u"班号", max_length=30, null=True)
 
 
 class PostGraduationInfo(models.Model):
@@ -50,7 +50,7 @@ class Scholarship(models.Model):
     amount = models.IntegerField(u"获奖金额", null=True)
 
 
-class  Grant(models.Model):
+class Grant(models.Model):
     student = models.ForeignKey(Postgraduate)
     code = models.CharField(u"助项代码", max_length=30, null=True)
     year = models.CharField(u"助学金学年度", max_length=50, null=True)

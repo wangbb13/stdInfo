@@ -32,10 +32,10 @@
                     <li role="presentation">
                     <a href="/postmanage/search">搜索<i class="glyphicon glyphicon-chevron-right"></i></a>
                     </li>
-                    <li role="presentation" class="active">
+                    <li role="presentation">
                     <a href="/postmanage/basic_info">基本信息<i class="glyphicon glyphicon-chevron-right"></i></a>
                     </li>
-                    <li role="presentation">
+                    <li role="presentation"class="active">
                     <a href="/postmanage/degree_info" >学籍信息<i class="glyphicon glyphicon-chevron-right"></i></a>
                     </li>
                     <li role="presentation">
@@ -57,48 +57,51 @@
             </div>
 
 
+
+
             <!--===============================================================================================-->
             <!--/span-->
             <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10"  id="content">
 
-                <div id="custom-toolbar">
-                    <div class="btn-group">
-                       <button class="btn btn-default" id="append-data" data-method="append">新增</button>
-                       <button class="btn btn-default" id="remove-data" data-method="remove">删除</button>
-                    </div>
-                </div>
-
-                <table id ="table-methods-table" data-toolbar="#custom-toolbar" class="table table-hover table-bordered" data-toggle="table" data-show-refresh="true" data-show-toggle="true" data-show-columns="true" data-search="true" data-select-item-name="toolbar1" data-pagination="true" data-sort-name="name" data-sort-order="desc"
+                <table id ="table-methods-table" class="table table-hover table-bordered" data-toggle="table" data-show-refresh="true" data-show-toggle="true" data-show-columns="true" data-search="true" data-select-item-name="toolbar1" data-pagination="true" data-sort-name="name" data-sort-order="desc"
                 border="0" align="center" cellpadding="0" cellspacing="0">
 
-                <!-- table content for basic_info page-->
+              <!-- table content for degree_info page-->
                 <thead>
                     <tr>
-                        <th data-field="status" data-checkbox="true"></th>
-                        <th data-visible="false" data-field="id">ID</th>
-                        <th data-valign="middle" data-align="center" data-field="number" data-sortable="true">学号</th>
+                        <th data-valign="middle" data-align="center">详情</th>
+                        <th data-field="id" data-visible="false">ID</th>
+                        <th data-valign="middle" data-align="center" data-field="number" data-sortable="true" >学号</th>
                         <th data-valign="middle" data-align="center" data-field="name" data-sortable="true" data-editable="true">姓名</th>
-                        <th data-valign="middle" data-align="center" data-field="gender" data-sortable="true" data-editable="true">性别</th>
-                        <th data-valign="middle" data-align="center" data-field="nation" data-sortable="true" data-editable="true">民族</th>
-                        <th data-valign="middle" data-align="center" data-field="politics" data-sortable="true" data-editable="true">政治面貌</th>
-                        <th data-valign="middle" data-align="center" date-field="tutor" data-sortable="true" data-editable="true">导师</th>
-                        <th data-valign="middle" data-align="center" data-field="phone" data-sortable="true" data-editable="true">手机</th>
-                        <th data-valign="middle" data-align="center" data-field="email" data-sortable="true" data-editable="true">邮箱</th>
+                        <th data-valign="middle" data-align="center" data-field="degree" data-sortable="true" data-editable="true">学位</th>
+                        <th data-valign="middle" data-align="center" data-field="class_name" data-sortable="true" data-editable="true">班号</th>
+                        <th data-valign="middle" data-align="center" data-field="first_test" data-sortable="true" data-editable="true">初试成绩</th>
+                        <th data-valign="middle" data-align="center" data-field="opening_time" data-sortable="true" data-editable="true">开题时间</th>
+                        <th data-valign="middle" data-align="center" data-field="exchange_info" data-sortable="true" data-editable="true">交换时间/学校</th>
+                        <th data-valign="middle" data-align="center" data-field="admissions_way" data-sortable="true" data-editable="true">招生途径</th>
+                        <th data-valign="middle" data-align="center" data-field="rank_before_graduation" data-sortable="true" data-editable="true">毕业前或退面前综合排名</th>
+                        <th data-valign="middle" data-align="center" data-field="admissions_rank" data-sortable="true" data-editable="true">入学成绩/排名</th>
+                        <th data-valign="middle" data-align="center" data-field="regular_school" data-sortable="true" data-editable="true">本科毕业学校</th>
+                        <th data-valign="middle" data-align="center" data-field="regular_major" data-sortable="true" data-editable="true">本科专业</th>
                     </tr>
               </thead>
               <tbody>
              {%  for student in students %}
                 <tr>
-                  <td></td>
+                  <td><a href="/manage/detail/{{ student.id }}">详情</a></td>
                   <td>{{ student.id }}</td>
                   <td>{{ student.number }}</td>
                   <td>{{ student.name }}</td>
-                  <td>{{ student.gender }}</td>
-                  <td>{{ student.nation }}</td>
-                  <td>{{ student.politics }}</td>
-                  <td>{{ student.tutor }}</td>
-                  <td>{{ student.phone }}</td>
-                  <td>{{ student.email }}</td>
+                  <td>{{ student.degree.degree }}</td>
+                  <td>{{ student.degree.class_name }}</td>
+                  <td>{{ student.degree.first_test }}</td>
+                  <td>{{ student.degree.opening_time }}</td>
+                  <td>{{ student.degree.exchange_info }}</td>
+                  <td>{{ student.degree.admissions_way }}</td>
+                  <td>{{ student.degree.rank_before_graduation }}</td>
+                  <td>{{ student.degree.admissions_rank }}</td>
+                  <td>{{ student.degree.regular_school }}</td>
+                  <td>{{ student.degree.regular_major }}</td>
                 </tr>
               {% endfor %}
 
@@ -106,18 +109,6 @@
             </table>
 
             <script type="text/javascript">
-            $('#remove-data').click(function () {
-                var selects = $('#table-methods-table').bootstrapTable('getSelections');
-                    ids = $.map(selects, function (row) {
-                        return row.status;
-                    });
-
-                $('#table-methods-table').bootstrapTable('remove', {
-                    field: 'status',
-                    values: ids
-                });
-            });
-
             $.fn.editable.defaults.mode = 'inline';
             var flag = 0, sRow = null;
             $('#table-methods-table').bootstrapTable({
@@ -129,7 +120,7 @@
                 if(flag == 1){
                     $.ajax({
                         type:"POST",
-                        url:"/manage/update_basic_info",
+                        url:"/manage/update_degree_info",
                         data: sRow,
                         dataType: "text",
                         error: function(){
@@ -139,12 +130,6 @@
                     flag = 0;
                 }
             });
-            /*$('#append-data').click(function () {
-                $('#table-methods-table').bootstrapTable('append', {
-                    number: 2011013239,
-                    name: '文庆福'
-                });
-            });*/
            </script>
 
         </div>
